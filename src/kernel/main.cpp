@@ -1,9 +1,10 @@
+#include <kernel/drivers/mmio.h>
 #include <lib/memUtils.h>
-#include <lib/output.h>
 #include <stdint.h>
+#include <stddef.h>
 
-extern uint32_t bssBegin;
-extern uint32_t bssEnd;
+extern uint64_t bssBegin;
+extern uint64_t bssEnd;
 
 namespace kernel {
 

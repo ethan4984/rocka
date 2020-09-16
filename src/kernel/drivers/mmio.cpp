@@ -1,8 +1,10 @@
-#include <lib/output.h>
+#include <kernel/drivers/mmio.h>
 
 namespace kernel {
 
 uint32_t mmioHandler::mmioBaseAddr = 0;
+uint32_t mmioHandler::gpioBaseAddr = 0;
+uint32_t mmioHandler::uartBaseAddr = 0;
 uint32_t mmioHandler::boardType = 0;
 
 void mmioHandler::init() {
@@ -23,15 +25,18 @@ void mmioHandler::init() {
             mmioBaseAddr = 0xfe00000;
             break;
         default: // we got a problem if this is ever ran
-            mmioBaseAddr = 0x69;
+            mmioBaseAddr = 0xf; // once kpanic is implemented, do one here
     }
+
+    gpioBaseAddr = mmioBaseAddr + 0x200000;
+    uartBaseAddr = gpioBaseAddr + 0x1000;
 }
 
-uint32_t mmioHandler::read(uint32_t reg) {
+uint32_t mmioHandler::read(uint64_t reg) {
     return *(uint32_t*)reg;
 }
 
-void mmioHandler::write(uint32_t reg, uint32_t data) {
+void mmioHandler::write(uint64_t reg, uint32_t data) {
     *(uint32_t*)reg = data;
 }
 
