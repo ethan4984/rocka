@@ -20,6 +20,10 @@
 #define UART_REG_ITIP (uartBaseAddr + 0x84)
 #define UART_REG_ITOP (uartBaseAddr + 0x88)
 #define UART_REG_TDR (uartBaseAddr + 0x8c)
+#define MBOX_BASE_ADDR (mmioBaseAddr + 0xb880)
+#define MBOX_READ (MBOX_BASE_ADDR)
+#define MBOX_STATUS (MBOX_BASE_ADDR + 0x18)
+#define MBOX_WRITE (MBOX_BASE_ADDR + 0x20)
 
 namespace kernel {
 
@@ -30,9 +34,11 @@ public:
     uint8_t uread();
 
     void uwrite(uint8_t data); 
-private:
-    void delay(uint32_t cnt);
+
+    void mboxWrite(uint32_t data);
 };
+
+inline volatile uint32_t __attribute__((aligned(16))) mbox[9] = { 9*4, 0, 0x38002, 12, 8, 2, 3000000, 0, 0 };
 
 inline uartHandler uart;
 

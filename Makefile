@@ -3,7 +3,8 @@ CXX = aarch64-none-elf-g++
 CXXFLAGS = -ffreestanding -O2 -Wall -Wextra -Isrc -std=c++17
 
 QEMU = qemu-system-aarch64
-QEMUFLAGS = -M raspi3 -no-reboot -monitor stdio -d int -no-shutdown 
+#QEMUFLAGS = -M raspi3 -no-reboot -monitor stdio -d int -no-shutdown 
+QEMUFLAGS = -M raspi3 -serial stdio
 
 CXX_SRC = $(shell find . -type f -name '*.cpp')
 

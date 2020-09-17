@@ -34,9 +34,14 @@
 
 namespace kernel {
 
-class gpioHandler {
-public:
+struct gpioHandler : protected mmioHandler {
+    void gppudclk0(uint32_t data, uint32_t controlSignal);
 
+    void gppudclk1(uint32_t data, uint32_t controlSignal);
+
+    void gppud(uint32_t data);
+
+    static uint32_t gppudSave;
 };
 
 inline gpioHandler gpio;
