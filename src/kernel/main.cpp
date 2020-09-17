@@ -1,6 +1,7 @@
 #include <kernel/drivers/mmio.h>
 #include <kernel/drivers/uart.h>
 #include <lib/memUtils.h>
+#include <lib/output.h>
 #include <stdint.h>
 #include <stddef.h>
 
@@ -13,9 +14,8 @@ extern "C" void kernelMain(uint64_t dtb_ptr32, uint64_t x1, uint64_t x2, uint64_
     memset8((uint8_t*)bssBegin, 0, bssEnd- bssBegin); // zero out .bss
 
     mmio.init();
-
+    
     uart.init();
-    uart.uwrite('h');
 
     for(;;);
 }
